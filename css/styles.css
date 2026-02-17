@@ -1,0 +1,59 @@
+/* Global / Tag selector */
+body {
+  scroll-behavior: smooth;
+  font-family: 'Roboto Mono', monospace;
+  background-color: #0d1117;
+  color: #c9d1d9;
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Neon Button */
+.neon-btn {
+  border: 2px solid #00d4ff;
+  color: #00d4ff;
+  background: transparent;
+  transition: all 0.4s ease;
+}
+
+.neon-btn:hover {
+  background: #00d4ff;
+  color: #0d1117;
+  box-shadow: 0 0 20px #00d4ff;
+}
+
+/* Home Section */
+#home {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Cards */
+.card {
+  border: 1px solid #00d4ff55 !important;
+  background-color: #161b22;
+  color: #c9d1d9;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 212, 255, 0.25);
+}
+
+/* Progress Bars */
+.progress {
+  background-color: #0d1117;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #00d4ff, #007bff);
+}
+
+/* Sections */
+section {
+  padding: 80px 0;
+}

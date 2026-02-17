@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration Form</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    #message {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    img {
+      width: 120px;
+      display: block;
+      margin: 15px auto;
+    }
+  </style>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Student Registration</h2>
+
+    <form id="regForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="text" id="phone" placeholder="Phone Number" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="password" id="confirm" placeholder="Confirm Password" required />
+
+      <button type="button" id="submitBtn">Submit</button>
+    </form>
+
+    <p id="message"></p>
+
+    <img
+      id="demoImg"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/120px-JavaScript-logo.png"
+    />
+
+    <button onclick="changeImage()">Change Image</button>
+
+    <button onclick="addText()">Add Text</button>
+    <button onclick="deleteText()">Delete Text</button>
+
+    <div id="textContainer"></div>
+
+    <button id="jqBtn">jQuery Button</button>
+  </div>
+
+  <script>
+    document.getElementById("submitBtn").onclick = function () {
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm").value;
+      const msg = document.getElementById("message");
+
+      if (!username || !email || !phone || !password || !confirm) {
+        msg.style.color = "red";
+        msg.innerHTML = "All fields are required.";
+        return;
+      }
+
+      if (!/^\d{10}$/.test(phone)) {
+        msg.style.color = "red";
+        msg.innerHTML = "Phone number must be 10 digits.";
+        return;
+      }
+
+      // ✅ FIXED EMAIL REGEX
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        msg.style.color = "red";
+        msg.innerHTML = "Invalid email format.";
+        return;
+      }
+
+      if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[&$#@]).{7,}$/.test(password)) {
+        msg.style.color = "red";
+        msg.innerHTML =
+          "Password must be 7+ chars with capital, digit & special (&,$,#,@).";
+        return;
+      }
+
+      if (password !== confirm) {
+        msg.style.color = "red";
+        msg.innerHTML = "Passwords do not match.";
+        return;
+      }
+
+      msg.style.color = "green";
+      msg.innerHTML = "Registration Successful!";
+    };
+
+    let changed = false;
+    function changeImage() {
+      const img = document.getElementById("demoImg");
+      img.src = changed
+        ? "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/120px-JavaScript-logo.png"
+        : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/120px-React-icon.svg.png";
+      changed = !changed;
+    }
+
+    function addText() {
+      document.getElementById("textContainer")
+        .appendChild(document.createTextNode("Hello Student! "));
+    }
+
+    function deleteText() {
+      const c = document.getElementById("textContainer");
+      if (c.firstChild) c.removeChild(c.firstChild);
+    }
+
+    $(function () {
+      $("#jqBtn").click(function () {
+        $(this).text("Clicked using jQuery");
+      }).attr("title", "This is a jQuery button");
+    });
+  </script>
+</body>
+</html>
